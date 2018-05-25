@@ -13,7 +13,9 @@ Para executar o projeto é necesário que as seguintes bibliotecas estejam insta
     `from warnings import warn`
     `from requests import get`
     `from bs4 import BeautifulSoup`
-    `import json`
+    `import json`   
+
+A versão do pip deve ser superior a 10.0.1
 
 ## Requisitos do projeto:
 

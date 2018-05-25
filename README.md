@@ -5,6 +5,7 @@ Projeto Datapirates
 
 Você pode executar o projeto usando o comando: 
     `py imdb_scraping.py` 
+Desde que esteja acessando a raiz do projeto. 
 
 ## Dependências para a execução: 
   

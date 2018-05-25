@@ -19,7 +19,6 @@ class ImdbSpider(object):
         filmes = []
         requests = 0
         pages = [str(i) for i in range(1, 11)]
-        requests += 1
         headers = {"Accept-Language": "en-US,en;q=0.8", "Accept-Charset": "ISO-8859-1,utf-8;q=0.7,*;q=0.3"}
         for page in pages:
                 response = get('http://www.imdb.com/search/title?&sort=num_votes,desc&page=' + page, headers = headers)
@@ -28,12 +27,14 @@ class ImdbSpider(object):
                 page_html = BeautifulSoup(response.text, 'html.parser')
                 mv_containers = page_html.find_all('div', class_ = 'lister-item mode-advanced')
                 for container in mv_containers:
+                    requests += 1
                     imdb = float(container.strong.text)
                     name = container.h3.a.text
                     genre = container.find('span', class_='genre').text
                     genre = ''.join(genre.split())
                     genre = genre.split(',')
                     filmes.append([imdb, name, genre])
+                print('Quantidade de titulos obtidos ate o momento: %s'% (requests))
         ordenado = sorted(filmes, key=lambda row: row[0])
         return ordenado
 
@@ -59,6 +60,7 @@ class ImdbSpider(object):
                 with open('JSONs/%s.json'% (filmes), 'w') as fp:
                     json.dump(filmes_por_genero[filmes], fp)
 
+        print('Arquivos JSONs gerados')
 
 
 
